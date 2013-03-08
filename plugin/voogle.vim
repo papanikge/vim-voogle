@@ -8,18 +8,25 @@ if exists('g:loaded_voogle') || v:version < 700
 endif
 let g:loaded_voogle = 1
 
-" Use this to set a custom search engine, like duck duck go
-" let g:search_engine = "https://encrypted.google.com/search?q="
 
-" TODO find browser
-func! GoogleLine()
-    " using @x for register x which is yanked with visual selection
-    let query = substitute(@x, " ", "+", "g")
-    "   we need visual selection not line
-	exe 'silent !chromium . https://encrypted.google.com/search?q=' . l:query
-    echo g:search_engine . query
+func! Google(mode)
+    " Use this to set a custom search engine, like duck duck go
+    let search_engine = "https://encrypted.google.com/search?q="
+    " Set the browser (TODO)
+    let browser = "!chromium "
+
+    if a:mode == 1
+        " Visual selection mode
+        " using @x for register x which is yanked with visual selection
+        let query = substitute(@x, " ", "+", "g")
+        let query = substitute(query, "\n", "", "g")
+        exec browser . "\"" . search_engine . query . "\""
+    else
+        " word user cursor mode
+    endif
 endfunc
 
 " mappings
-nnoremap gs :silent !chromium "https://encrypted.google.com/search?q="<cword><CR>
-vnoremap gs "xy:call GoogleLine()<CR>
+" nnoremap gs :silent !chromium "https://encrypted.google.com/search?q="<cword><CR>
+nnoremap gs :silent call Google(0)<CR>
+vnoremap gs "xy:silent call Google(1)<CR>
