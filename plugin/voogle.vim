@@ -8,7 +8,6 @@ if exists('g:loaded_voogle') || v:version < 700
 endif
 let g:loaded_voogle = 1
 
-
 func! Google(mode)
     " Use this to set a custom search engine, like duck duck go
     let search_engine = "https://encrypted.google.com/search?q="
@@ -23,10 +22,11 @@ func! Google(mode)
         exec browser . "\"" . search_engine . query . "\""
     else
         " word user cursor mode
+        let query = substitute(@x, "\n", "", "g")
+        exec browser . "\"" . search_engine . query . "\""
     endif
 endfunc
 
-" mappings
-" nnoremap gs :silent !chromium "https://encrypted.google.com/search?q="<cword><CR>
-nnoremap gs :silent call Google(0)<CR>
+" final mappings
+nnoremap gs "xyiw:silent call Google(0)<CR>
 vnoremap gs "xy:silent call Google(1)<CR>
