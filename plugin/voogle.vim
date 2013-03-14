@@ -38,12 +38,13 @@ func! Google(mode)
         " using @x for register x which is yanked with visual selection
         let query = substitute(@x, " ", "+", "g")
         let query = substitute(query, "\n", "", "g")
-        exec browser . "\"" . g:search_engine . query . "\""
     else
         " word user cursor mode
         let query = substitute(@x, "\n", "", "g")
-        exec browser . "\"" . g:search_engine . query . "\""
     endif
+
+    " Run the command in a new process and silence its output
+    exec browser . "\"" . g:search_engine . query . "\" > /dev/null 2>&1 &"
 endfunc
 
 " final mappings
