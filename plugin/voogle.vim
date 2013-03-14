@@ -9,7 +9,9 @@ endif
 let g:loaded_voogle = 1
 
 " Use this to set a custom search engine, like duck duck go
-let g:search_engine = "https://encrypted.google.com/search?q="
+if !exists("g:search_engine")
+    let g:search_engine = "https://encrypted.google.com/search?q="
+endif
 
 func! Google(mode)
     " Find a browser
