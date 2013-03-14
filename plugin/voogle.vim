@@ -14,15 +14,25 @@ if !exists("g:search_engine")
 endif
 
 func! Google(mode)
+
+    " Was the browser defined by configuration
+    if exists("g:voogle_browser") 
+        if executable(g:voogle_browser)
+            let browser = "!" . g:voogle_browser . " "
+        endif
+    endif
+
     " Find a browser
-    if executable("chromium")
-        let browser = "!chromium "
-    elseif executable("chrome")
-        let browser = "!chrome "
-    elseif executable("firefox")
-        let browser = "!firefox "
-    elseif executable("links")
-        let browser = "!links "
+    if !exists("browser")
+        if executable("chromium")
+            let browser = "!chromium "
+        elseif executable("chrome")
+            let browser = "!chrome "
+        elseif executable("firefox")
+            let browser = "!firefox "
+        elseif executable("links")
+            let browser = "!links "
+        endif
     endif
 
     if a:mode == 1
