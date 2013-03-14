@@ -14,15 +14,23 @@ if !exists("g:search_engine")
 endif
 
 func! Google(mode)
+
+    " Is the browser defined via configuration?
+    if exists("g:voogle_browser") && executable(g:voogle_browser)
+        let browser = "!" . g:voogle_browser . " "
+    endif
+
     " Find a browser
-    if executable("chromium")
-        let browser = "!chromium "
-    elseif executable("chrome")
-        let browser = "!chrome "
-    elseif executable("firefox")
-        let browser = "!firefox "
-    elseif executable("links")
-        let browser = "!links "
+    if !exists("browser")
+        if executable("chromium")
+            let browser = "!chromium "
+        elseif executable("chrome")
+            let browser = "!chrome "
+        elseif executable("firefox")
+            let browser = "!firefox "
+        elseif executable("links")
+            let browser = "!links "
+        endif
     endif
 
     if a:mode == 1
@@ -30,12 +38,14 @@ func! Google(mode)
         " using @x for register x which is yanked with visual selection
         let query = substitute(@x, " ", "+", "g")
         let query = substitute(query, "\n", "", "g")
-        exec browser . "\"" . g:search_engine . query . "\""
     else
         " word user cursor mode
         let query = substitute(@x, "\n", "", "g")
-        exec browser . "\"" . g:search_engine . query . "\""
     endif
+
+    " Run the command in a new process and silence its output
+    exec browser . "\"" . g:search_engine . query . "\" > /dev/null 2>&1 &"
+    redraw!
 endfunc
 
 " final mappings
