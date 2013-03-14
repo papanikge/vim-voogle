@@ -45,6 +45,7 @@ func! Google(mode)
 
     " Run the command in a new process and silence its output
     exec browser . "\"" . g:search_engine . query . "\" > /dev/null 2>&1 &"
+    redraw!
 endfunc
 
 " final mappings
