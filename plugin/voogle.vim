@@ -15,7 +15,7 @@ endif
 
 func! Google(mode)
 
-    " Was the browser defined by configuration
+    " Is the browser defined via configuration?
     if exists("g:voogle_browser") && executable(g:voogle_browser)
         let browser = "!" . g:voogle_browser . " "
     endif
