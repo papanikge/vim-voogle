@@ -43,8 +43,14 @@ func! Google(mode)
         let query = substitute(@x, "\n", "", "g")
     endif
 
-    " Run the command in a new process and silence its output
-    exec browser . "\"" . g:search_engine . query . "\" > /dev/null 2>&1 &"
+    " Prepare the shell command
+    if has("unix") || has("macunix")
+        let shell_command = browser . "\"" . g:search_engine . query . "\" > /dev/null 2>&1 &"
+    else
+        let shell_command = browser . "\"" . g:search_engine . query . "\""
+    endif
+
+    execute shell_command
     redraw!
 endfunc
 
