@@ -44,7 +44,7 @@ func! Google(mode)
     endif
 
     " Prepare the shell command
-    if has("unix")
+    if has("unix") || has("macunix")
         let shell_command = browser . "\"" . g:search_engine . query . "\" > /dev/null 2>&1 &"
     else
         let shell_command = browser . "\"" . g:search_engine . query . "\""
