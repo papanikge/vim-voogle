@@ -22,7 +22,9 @@ func! Google(mode)
 
     " Find a browser
     if !exists("browser")
-        if executable("chromium")
+        if has("mac")
+            let browser = "!open "
+        elseif executable("chromium")
             let browser = "!chromium "
         elseif executable("chrome")
             let browser = "!chrome "
