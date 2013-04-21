@@ -28,7 +28,7 @@ Voogle.vim tries to find an available browser from:
 Set the `g:search_engine` variable to your desire for custom searches
 if you don't like google
 
-You can disable the plugin by setting `g:loaded_voogle` to 0.
+You can disable the plugin by `let g:loaded_voogle=0`.
 
 ##License
 
