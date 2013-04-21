@@ -1,6 +1,6 @@
 " voogle.vim - Google from vim
 " Original Author : George Papanikolaou <papanikge@ceid.upatras.gr>
-" Version         : 1.1
+" Version         : 1.2
 " Use pathogen to install or in plugin/voogle.vim
 
 if exists('g:loaded_voogle') || v:version < 700
