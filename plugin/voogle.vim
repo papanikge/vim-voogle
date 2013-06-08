@@ -56,7 +56,7 @@ func! Google(mode)
     redraw!
 endfunc
 
-" Use this to set a custom search engine, like duck duck go
+" Use this to set a custom mapping
 if !exists("g:voogle_map")
   let g:voogle_map = "gs"
 endif
