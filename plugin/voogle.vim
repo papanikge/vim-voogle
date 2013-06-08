@@ -56,6 +56,11 @@ func! Google(mode)
     redraw!
 endfunc
 
-" final mappings
-nnoremap gs "xyiw:silent call Google(0)<CR>
-vnoremap gs "xy:silent call Google(1)<CR>
+" Use this to set a custom search engine, like duck duck go
+if !exists("g:voogle_map")
+  let g:voogle_map = "gs"
+endif
+
+let key = g:voogle_map
+exe 'nnoremap ' . key .  ' "xyiw:silent call Google(0)<CR>'
+exe 'vnoremap ' . key .  ' "xy:silent call Google(1)<CR>'
